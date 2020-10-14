@@ -1,0 +1,43 @@
+apiVersion: v1
+items:
+- apiVersion: networking.istio.io/v1alpha3
+  kind: VirtualService
+  metadata:
+    annotations:
+      cloudfoundry.org/fqdn: route-1.example.com
+    creationTimestamp: "2020-10-14T17:32:29Z"
+    generation: 1
+    name: vs-690c5bc83565d5caadbddfbe597f633329c1138915c9d4fbaa7fd09684d8455c
+    namespace: default
+    ownerReferences:
+    - apiVersion: networking.cloudfoundry.org/v1alpha1
+      kind: Route
+      name: route-1
+      uid: 5317b01a-fce2-4ef5-a9fd-9b8e86102a54
+    resourceVersion: "21321"
+    selfLink: /apis/networking.istio.io/v1alpha3/namespaces/default/virtualservices/vs-690c5bc83565d5caadbddfbe597f633329c1138915c9d4fbaa7fd09684d8455c
+    uid: ead0fa51-52ed-4d60-9c10-72306fd00be3
+  spec:
+    gateways:
+    - default/istio-ingressgateway
+    hosts:
+    - route-1.example.com
+    http:
+    - match:
+      - uri:
+          prefix: /somepath
+      route:
+      - destination:
+          host: s-d1
+        headers:
+          request:
+            set:
+              CF-App-Id: a1
+              CF-App-Process-Type: web
+              CF-Organization-Id: cc-org-guid
+              CF-Space-Id: cc-space-guid
+        weight: 100
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""
